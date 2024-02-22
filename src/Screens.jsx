@@ -145,7 +145,7 @@ export function PlayScreen({ end }) {
             {tryCount}
           </div>
         </div>
-        <div className="p-4 bg-indigo-50 rounded-lg grid grid-cols-4 gap-4">
+        <div className="p-4 bg-indigo-50 rounded-lg grid grid-cols-4 gap-4 shadow-[0_0_8px_#3b82f64d]">
           {getTiles(16).map((tile, i) => (
             <Tile
               key={i}

@@ -20,20 +20,22 @@ export const possibleTileContents = [
 
 export function StartScreen({ start }) {
   return (
-    <div className="h-screen w-full flex items-center justify-center">
-      <div className="bg-pink-50 size-[300px] rounded-lg py-[43px] flex flex-col items-center">
-        <h1 className="text-center text-pink-500 font-bold text-[32px]">
-          Memory
-        </h1>
-        <p className="text-xs text-pink-500 font-medium mt-4">
-          Flip over tiles looking for pairs
-        </p>
-        <button
-          onClick={start}
-          className="mt-10 text-white px-10 h-[37px] rounded-[20px] shadow-md bg-gradient-to-b from-pink-400 to-pink-600 hover:from-pink-600 hover:to-pink-600 transition-all ease-in-out active:translate-y-[2px] hover:scale-[1.05]"
-        >
-          Play
-        </button>
+    <div className="animate__animated animate__fadeInDown h-screen w-full flex items-center justify-center">
+      <div className="start__card relative overflow-hidden size-[315px] rounded-lg">
+        <div className="bg-pink-50 rounded-md absolute z-10 size-[300px] inset-2 py-[43px] flex flex-col items-center">
+          <h1 className="text-center text-pink-500 font-bold text-[32px]">
+            Memory
+          </h1>
+          <p className="text-xs text-pink-500 font-medium mt-4">
+            Flip over tiles looking for pairs
+          </p>
+          <button
+            onClick={start}
+            className="animate__animated animate-pulse animate__slow mt-10 text-white px-10 h-[37px] rounded-[20px] shadow-md bg-gradient-to-b from-pink-400 to-pink-600 hover:from-pink-600 hover:to-pink-600 transition-all ease-in-out active:translate-y-[2px] hover:scale-[1.05]"
+          >
+            Play
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -45,7 +47,7 @@ export function PlayScreen({ end }) {
 
   const [tiles, setTiles] = useState(null);
   const [tryCount, setTryCount] = useState(0);
-  const [wronglyMatched, setWronglyMatched] = useState(false)
+  const [wronglyMatched, setWronglyMatched] = useState(false);
 
   const getTiles = (tileCount) => {
     // Throw error if count is not even.
@@ -99,7 +101,7 @@ export function PlayScreen({ end }) {
         RightCardRef.current.play();
       } else {
         WrongCardRef.current.play();
-        setWronglyMatched(true)
+        setWronglyMatched(true);
       }
 
       // After a delay, either flip the tiles back or mark them as matched.
@@ -114,7 +116,7 @@ export function PlayScreen({ end }) {
           if (newTiles.every((tile) => tile.state === "matched")) {
             setTimeout(end, 0);
           }
-          setWronglyMatched(false)
+          setWronglyMatched(false);
           return newTiles;
         });
       }, 1000);
@@ -133,13 +135,24 @@ export function PlayScreen({ end }) {
       <div className="flex flex-col gap-8">
         <div className="flex gap-2 items-center justify-center">
           <h1 className="text-indigo-500">Tries</h1>
-          <div className={`w-6 h-[21px] rounded-md flex items-center justify-center bg-indigo-200 text-sm font-medium ${tryCount > 10 ? 'animate__animated animate__flash animate__infinite animate__slow text-red-600' : 'text-indigo-600'}`}>
+          <div
+            className={`w-6 h-[21px] rounded-md flex items-center justify-center bg-indigo-200 text-sm font-medium ${
+              tryCount > 10
+                ? "animate__animated animate__flash animate__infinite animate__slow text-red-600"
+                : "text-indigo-600"
+            }`}
+          >
             {tryCount}
           </div>
         </div>
         <div className="p-4 bg-indigo-50 rounded-lg grid grid-cols-4 gap-4">
           {getTiles(16).map((tile, i) => (
-            <Tile key={i} flip={() => flip(i)} {...tile} wronglyMatched={wronglyMatched}/>
+            <Tile
+              key={i}
+              flip={() => flip(i)}
+              {...tile}
+              wronglyMatched={wronglyMatched}
+            />
           ))}
         </div>
       </div>

@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.start__card::before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 300px;
+    transform-origin: bottom right;
+    background: linear-gradient(0deg, transparent, #db2777c7, #db2777);
+    animation: animate 6s linear infinite;
+}
+
+.start__card::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 300px;
+    transform-origin: bottom right;
+    background: linear-gradient((0deg, transparent, #db2777c7, #db2777));
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
